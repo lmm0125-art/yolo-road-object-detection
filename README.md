@@ -1,49 +1,65 @@
-# Tensor Programming — coursework
+# YOLO 기반 도로 객체 탐지 프로젝트
 
-Coursework for **텐서프로그래밍 (Tensor Programming)**, 2026-1학기, Hanyang
-University ERICA. Assignments and the final group project.
+YOLO 기반 도로 객체 탐지 모델 학습 및 평가 — 텐서프로그래밍 2026-1 기말 프로젝트, TGroup.
 
-| folder | contents |
+## Model
+
+YOLO11s pretrained model을 사용하여 학습하였다.
+
+## Dataset
+
+본 프로젝트에서는 DAWN 데이터셋과 조원 데이터셋을 사용하였다.
+두 데이터셋의 클래스 구성이 달라서 조원 데이터셋의 클래스를 DAWN 기준으로 변환하였다.
+
+## Final Training Setting
+
+| | |
 |---|---|
-| [`homework/`](homework/) | HW1–HW5 notebooks (PyTorch / tensor basics) |
-| [`yolo-project/`](yolo-project/) | final project: YOLO-based road object detection (team TGroup) |
+| Model | YOLO11s |
+| Epochs | 30 |
+| Image size | 640 |
+| Batch size | 16 |
+| Optimizer | AdamW |
+| Device | GPU |
 
-## yolo-project
+## Final Result
 
-Object detection on road scenes, trained with Ultralytics YOLO11s on a
-combination of the DAWN dataset and a teammate's dataset (class names remapped
-to the DAWN taxonomy).
+| Precision | Recall | mAP50 | mAP50-95 |
+|---|---|---|---|
+| 0.603 | 0.356 | 0.373 | 0.215 |
 
-| metric | value |
-|---|---|
-| precision | 0.603 |
-| recall | 0.356 |
-| mAP50 | 0.373 |
-| mAP50-95 | 0.215 |
+## External Git Usage
+
+외부 Git 저장소를 직접 clone하여 사용하지 않았으며, Ultralytics YOLO 라이브러리를 pip install 방식으로 사용하였다.
+
+---
+
+## What is in this repository
 
 ```
-yolo-project/
-├── 01_code/train_yolo_final.py        training entry point
-├── 02_dataset/                        class mapping and the merged data.yaml
-├── 04_results/                        confusion matrices, PR curves, prediction examples
-└── TGroup_YOLO_Final_Project.ipynb    the submitted notebook, outputs included
+01_code/train_yolo_final.py        training entry point
+02_dataset/class_mapping.md        how the teammate dataset classes were remapped
+02_dataset/combined_dawn_member_converted.yaml   merged dataset definition
+04_results/                        confusion matrices, training curves, prediction examples
+TGroup_YOLO_Final_Project.ipynb    the submitted notebook, with outputs
 ```
 
-Training was run with YOLO11s, 30 epochs, image size 640, batch 16, AdamW, on a
-GPU. The dataset zips (~800 MB) and the trained weights (`best.pt`, `last.pt`,
-37 MB) are **not** in this repository: the datasets are third-party and the
-weights can be regenerated with `01_code/train_yolo_final.py`.
+Run it with:
+
+```bash
+pip install ultralytics
+python 01_code/train_yolo_final.py
+```
 
 ## What is not in this repository
 
 | excluded | why |
 |---|---|
-| `Lec1–Lec9.pdf` | lecture slides, course material, not mine to republish |
-| `HW1–HW5.pdf` | assignment sheets, same reason |
-| presentation PDF / `.docx` script | presentation material |
-| `02_dataset/*.zip` | DAWN and BDD100K subsets, 800 MB, downloadable from the original sources |
-| `03_model/*.pt` | trained weights, reproducible from the training script |
+| `Lec1–Lec9.pdf`, `HW*.pdf` | course material, not mine to republish |
+| presentation PDF and script | presentation material |
+| `02_dataset/*.zip` (802 MB) | DAWN and BDD100K subsets, available from their original sources |
+| `03_model/*.pt` (37 MB) | trained weights, reproducible from `01_code/train_yolo_final.py` |
 
 ## Team
 
-Final project by TGroup — 종열, 손첸디, 이멍멍, 유천일, 후예항.
+TGroup — 종열, 손첸디, 이멍멍, 유천일, 후예항.
