@@ -1,0 +1,15 @@
+train:
+- /content/datasets/DAWN/train/images
+- /content/datasets/MEMBER_converted_to_DAWN/train/images
+val:
+- /content/datasets/DAWN/valid/images
+- /content/datasets/MEMBER_converted_to_DAWN/valid/images
+nc: 7
+names:
+- bicycle
+- bus
+- car
+- motorcycle
+- person
+- train
+- truck

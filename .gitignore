@@ -1,0 +1,15 @@
+# macOS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+
+# Heavy artefacts: datasets and trained weights are not tracked
+*.zip
+*.pt
